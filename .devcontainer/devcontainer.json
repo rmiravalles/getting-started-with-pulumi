@@ -1,0 +1,25 @@
+{
+    "name": "Python Pulumi Azure Development",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "3.12"
+        },
+        "ghcr.io/devcontainers/features/azure-cli:1": "latest",
+        "ghcr.io/pulumi/devcontainer-features/pulumi:1": "latest"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-azuretools.vscode-azureresourcegroups",
+                "ms-azuretools.vscode-azure-account"
+            ]
+        }
+    },
+    "remoteUser": "vscode",
+    "postCreateCommand": "pip install --user -r requirements.txt || true"
+}
