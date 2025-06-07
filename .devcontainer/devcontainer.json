@@ -1,0 +1,31 @@
+{
+    "name": "Pulumi",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/python:1": {
+            "version": "3.12"
+        },
+        "ghcr.io/devcontainers/features/azure-cli:1": "latest",
+        "ghcr.io/pulumi/devcontainer-features/pulumi:1": "latest"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-azuretools.vscode-azure-account",
+                "ms-azuretools.vscode-azurecli",
+                "ms-azuretools.vscode-azurestorage",
+                "ms-azuretools.vscode-azureresourcegroups",
+                "ms-azuretools.vscode-azureresourcemanager",
+                "redhat.vscode-yaml",
+                "pulumi.pulumi-vscode",
+                "pulumi.pulumi-azure-vscode"
+            ]
+        }
+    },
+    "remoteUser": "vscode",
+    "postCreateCommand": "pip install --user -r requirements.txt || true"
+}
