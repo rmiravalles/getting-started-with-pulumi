@@ -1,0 +1,11 @@
+name: static-web
+description: A Python program to deploy a static website on Azure
+runtime:
+  name: python
+  options:
+    toolchain: pip
+    virtualenv: venv
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: static-website-azure-python

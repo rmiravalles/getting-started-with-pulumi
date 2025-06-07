@@ -1,0 +1,5 @@
+config:
+  azure-native:location: WestEurope
+  static-web:errorDocument: error.html
+  static-web:indexDocument: index.html
+  static-web:path: ./www
