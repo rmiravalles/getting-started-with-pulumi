@@ -1,10 +1,13 @@
 {
     "name": "Pulumi Development",
-    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "image": "mcr.microsoft.com/devcontainers/base:jammy",
     "features": {
         "ghcr.io/devcontainers/features/python:1": {},
         "ghcr.io/devcontainers/features/azure-cli:1": {},
-        "ghcr.io/devcontainers/features/docker-in-docker:1": {}
+        "ghcr.io/devcontainers/features/docker-in-docker:1": {
+            "moby": false,
+            "version": "latest"
+        }
     },
     "postCreateCommand": "curl -fsSL https://get.pulumi.com | sh && echo 'export PATH=$PATH:$HOME/.pulumi/bin' >> ~/.bashrc",
     "remoteUser": "vscode",
