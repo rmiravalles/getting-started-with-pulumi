@@ -1,5 +1,5 @@
 {
-    "name": "Python Pulumi Azure Development",
+    "name": "Pulumi",
     "build": {
         "dockerfile": "Dockerfile"
     },
@@ -15,8 +15,14 @@
             "extensions": [
                 "ms-python.python",
                 "ms-python.vscode-pylance",
+                "ms-azuretools.vscode-azure-account",
+                "ms-azuretools.vscode-azurecli",
+                "ms-azuretools.vscode-azurestorage",
                 "ms-azuretools.vscode-azureresourcegroups",
-                "ms-azuretools.vscode-azure-account"
+                "ms-azuretools.vscode-azureresourcemanager",
+                "redhat.vscode-yaml",
+                "pulumi.pulumi-vscode",
+                "pulumi.pulumi-azure-vscode"
             ]
         }
     },
