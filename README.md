@@ -60,3 +60,15 @@ pulumi new --list | grep azure
 ```
 
 For this project, we'll use a sample Pulumi project that creates a simple static website on Azure.
+
+### Creating a new Pulumi project using the Azure Static Website template
+
+This project will deploy a static website on Azure using Azure Blob Storage for hosting. It will also deploy an Azure CDN endpoint to serve the static content with low latency, caching, and HTTPS support.
+
+To create the project using the Azure Static Website template, run the following command:
+
+```bash
+pulumi new static-website-azure-python
+```
+
+This command will prompt you for some configuration options, such as the project name, description, stack, and Azure region. You can accept the default values or customize them as needed.
