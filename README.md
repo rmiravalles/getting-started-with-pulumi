@@ -26,7 +26,7 @@ For more installation options, visit the [Pulumi installation page](https://www.
 
 ### Pulumi Cloud as the state backend
 
-Pulumi Cloud is a managed service that provides a secure and scalable backend for storing your Pulumi state files. To use Pulumi Cloud, you need to sign up for an account at [Pulumi Cloud](https://app.pulumi.com/signup). Pulumi Cloud is free for personal use and offers a generous free tier.
+Pulumi Cloud is a managed service that provides a secure and scalable backend for storing your Pulumi state files. To use Pulumi Cloud, you need to sign up for an account at [Pulumi Cloud](https://app.pulumi.com/signup). Pulumi Cloud is free for personal use and offers a generous free tier. You can also use other backends like AWS S3, Azure Blob Storage, or Google Cloud Storage if you prefer to manage your own state files.
 
 ### Azure subscription and Azure CLI
 
@@ -51,12 +51,12 @@ az login
 Pulumi offers a wide range of ready-to-use templates to help you get started quickly. You can create a new Pulumi project using the `pulumi new` command. To list available templates, run:
 
 ```bash
-pulumi new --list
+pulumi new -l
 ```
 Since we are using Azure, we can filter the templates to show only Azure-related ones:
 
 ```bash
-pulumi new --list | grep azure
+pulumi new -l | grep azure
 ```
 
 For this project, we'll use a sample Pulumi project that creates a simple static website on Azure.
@@ -72,3 +72,35 @@ pulumi new static-website-azure-python
 ```
 
 This command will prompt you for some configuration options, such as the project name, description, stack, and Azure region. You can accept the default values or customize them as needed.
+
+### Activating the virtual environment and installing the required packages
+
+When you create a new Pulumi project, it automatically sets up a virtual environment for you. To activate the virtual environment, run the following command:
+
+```bash
+source venv/bin/activate
+```
+
+To install the required packages for the project, you can use `pip`. First, make sure you have pip installed.
+
+```bash
+pip install -r requirements.txt
+```
+
+This command will install the necessary Python packages specified in the `requirements.txt` file, including the Pulumi Azure Native SDK and other dependencies.
+
+### The __main.py__ file
+
+The `__main.py__` file is the entry point for your Pulumi project. It contains the code that defines the resources to be created in Azure.
+
+### The Pulumi.yaml file
+
+The `Pulumi.yaml` file is the configuration file for your Pulumi project. It contains metadata about the project, such as the project name, description, runtime, and dependencies.
+
+### The Pulumi.<stack_name>.yaml file
+
+The `Pulumi.<stack_name>.yaml` file contains the configuration for a specific stack in your Pulumi project. A stack is an isolated instance of your infrastructure, allowing you to manage different environments (e.g., development, staging, production) independently.
+
+## Pulumi up
+
+To deploy the resources defined in your Pulumi project, you can use the `pulumi up` command. This command will show you a preview of the changes that will be made to your infrastructure and prompt you for confirmation before proceeding with the deployment.

@@ -1,5 +1,6 @@
+encryptionsalt: v1:DTtnayl7wUM=:v1:+jvgA/VANFom2V7u:ims543DmG+copcCOF0SJI/+C6ZkWcw==
 config:
-  azure-native:location: WestEurope
+  azure-native:location: westeurope
   static-web:errorDocument: error.html
   static-web:indexDocument: index.html
   static-web:path: ./www
