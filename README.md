@@ -51,12 +51,12 @@ az login
 Pulumi offers a wide range of ready-to-use templates to help you get started quickly. You can create a new Pulumi project using the `pulumi new` command. To list available templates, run:
 
 ```bash
-pulumi new --list
+pulumi new -l
 ```
 Since we are using Azure, we can filter the templates to show only Azure-related ones:
 
 ```bash
-pulumi new --list | grep azure
+pulumi new -l | grep azure
 ```
 
 For this project, we'll use a sample Pulumi project that creates a simple static website on Azure.
