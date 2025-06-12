@@ -72,3 +72,35 @@ pulumi new static-website-azure-python
 ```
 
 This command will prompt you for some configuration options, such as the project name, description, stack, and Azure region. You can accept the default values or customize them as needed.
+
+### Activating the virtual environment and installing the required packages
+
+When you create a new Pulumi project, it automatically sets up a virtual environment for you. To activate the virtual environment, run the following command:
+
+```bash
+source venv/bin/activate
+```
+
+To install the required packages for the project, you can use `pip`. First, make sure you have pip installed.
+
+```bash
+pip install -r requirements.txt
+```
+
+This command will install the necessary Python packages specified in the `requirements.txt` file, including the Pulumi Azure Native SDK and other dependencies.
+
+### The __main.py__ file
+
+The `__main.py__` file is the entry point for your Pulumi project. It contains the code that defines the resources to be created in Azure.
+
+### The Pulumi.yaml file
+
+The `Pulumi.yaml` file is the configuration file for your Pulumi project. It contains metadata about the project, such as the project name, description, runtime, and dependencies.
+
+### The Pulumi.<stack_name>.yaml file
+
+The `Pulumi.<stack_name>.yaml` file contains the configuration for a specific stack in your Pulumi project. A stack is an isolated instance of your infrastructure, allowing you to manage different environments (e.g., development, staging, production) independently.
+
+## Pulumi up
+
+To deploy the resources defined in your Pulumi project, you can use the `pulumi up` command. This command will show you a preview of the changes that will be made to your infrastructure and prompt you for confirmation before proceeding with the deployment.
