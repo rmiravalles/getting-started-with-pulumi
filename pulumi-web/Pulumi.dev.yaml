@@ -1,0 +1,5 @@
+config:
+  azure-native:location: WestEurope
+  pulumi-web:errorDocument: error.html
+  pulumi-web:indexDocument: index.html
+  pulumi-web:path: ./www
