@@ -101,6 +101,20 @@ The `Pulumi.yaml` file is the configuration file for your Pulumi project. It con
 
 The `Pulumi.<stack_name>.yaml` file contains the configuration for a specific stack in your Pulumi project. A stack is an isolated instance of your infrastructure, allowing you to manage different environments (e.g., development, staging, production) independently.
 
+### Creating a new stack
+
+To create a new stack in your Pulumi project, you can use the `pulumi stack init` command. This command will create a new stack with the specified name. For example, to create a stack named "prod", run:
+
+```bash 
+pulumi stack init prod
+```
+
+To switch to the newly created stack, you can use the `pulumi stack select` command:
+
+```bash
+pulumi stack select prod
+```
+
 ## Pulumi up
 
 To deploy the resources defined in your Pulumi project, you can use the `pulumi up` command. This command will show you a preview of the changes that will be made to your infrastructure and prompt you for confirmation before proceeding with the deployment.

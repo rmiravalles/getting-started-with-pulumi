@@ -3,6 +3,8 @@ import pulumi
 import pulumi_azure_native as azure_native
 import pulumi_synced_folder as synced_folder
 
+stack = pulumi.get_stack()
+
 # Import the program's configuration settings.
 config = pulumi.Config()
 path = config.get("path") or "./www"
@@ -10,7 +12,14 @@ index_document = config.get("indexDocument") or "index.html"
 error_document = config.get("errorDocument") or "error.html"
 
 # Create a resource group for the website.
-resource_group = azure_native.resources.ResourceGroup("resource-group")
+resource_group = azure_native.resources.ResourceGroup(
+    f"pulumi-{stack}-static-web",
+    resource_group_name=f"pulumi-{stack}-static-web",
+    tags={
+        "pulumi": "true",
+        "stack": stack,
+    },
+)
 
 # Create a blob storage account.
 account = azure_native.storage.StorageAccount(
