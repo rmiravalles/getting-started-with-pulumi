@@ -1,0 +1,11 @@
+name: static-web-test
+description: A Pulumi demo program that deploys a static web to Azure
+runtime:
+  name: python
+  options:
+    toolchain: pip
+    virtualenv: venv
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: static-website-azure-python
