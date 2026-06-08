@@ -32,7 +32,7 @@ Pulumi Cloud is a managed service that provides a secure and scalable backend fo
 
 To deploy resources on Azure, you need an Azure subscription. If you don't have one, you can create a free account at [Azure Free Account](https://azure.microsoft.com/free/).
 
-You also need to install the Azure CLI to interact with Azure resources. You can install it by following the instructions on the [Azure CLI installation page](https://docs.microsoft.com/cli/azure/install-azure-cli).
+You also need to install the Azure CLI to interact with Azure resources. You can install it by following the instructions on the [Azure CLI installation page](https://learn.microsoft.com/cli/azure/install-azure-cli).
 
 If you're using a Debian-based Linux distribution, you can install the Azure CLI using the following command:
 
@@ -52,12 +52,10 @@ Pulumi offers a wide range of ready-to-use templates to help you get started qui
 
 ```bash
 pulumi new -l
-pulumi new -l
 ```
 Since we are using Azure, we can filter the templates to show only Azure-related ones:
 
 ```bash
-pulumi new -l | grep azure
 pulumi new -l | grep azure
 ```
 
@@ -91,9 +89,9 @@ pip install -r requirements.txt
 
 This command will install the necessary Python packages specified in the `requirements.txt` file, including the Pulumi Azure Native SDK and other dependencies.
 
-### The __main.py__ file
+### The __main__.py__ file
 
-The `__main.py__` file is the entry point for your Pulumi project. It contains the code that defines the resources to be created in Azure.
+The `__main__.py__` file is the entry point for your Pulumi project. It contains the code that defines the resources to be created in Azure.
 
 ### The Pulumi.yaml file
 

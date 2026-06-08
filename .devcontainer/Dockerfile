@@ -1,12 +1,12 @@
-FROM pulumi/pulumi
+FROM pulumi/pulumi:3.245.0
 
 # Install golangci-lint
-RUN version=1.42.1 \
-    && curl -fsSL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b /go/bin v$version \
+RUN version=2.12.2 \
+    && curl -fsSL https://raw.githubusercontent.com/golangci/golangci-lint/v$version/install.sh | sh -s -- -b /go/bin v$version \
     && golangci-lint version
 
 # Install pulumictl
-RUN version=0.0.42 \
+RUN version=0.0.50 \
     && curl -fsSLO https://github.com/pulumi/pulumictl/releases/download/v$version/pulumictl-v$version-linux-amd64.tar.gz \
     && tar -xzf pulumictl-v$version-linux-amd64.tar.gz --directory /usr/local/bin --no-same-owner pulumictl \
     && rm -f pulumictl-v$version-linux-amd64.tar.gz \
@@ -25,8 +25,8 @@ RUN groupadd --gid $USER_GID $USER_NAME \
 
 RUN mkdir -p /go/bin \
     && chown -R $USER_NAME: /go \
-    && mkdir -p $HOME/.pulumi/bin \
-    && chown -R $USER_NAME: $HOME/.pulumi
+    && mkdir -p /home/$USER_NAME/.pulumi/bin \
+    && chown -R $USER_NAME: /home/$USER_NAME/.pulumi
 
 USER $USER_NAME
 
