@@ -7,9 +7,10 @@
         "ghcr.io/devcontainers/features/docker-in-docker:1": {
             "moby": false,
             "version": "latest"
-        }
+        },
+        "ghcr.io/devcontainers/features/github-cli:1": {}
     },
-    "postCreateCommand": "curl -fsSL https://get.pulumi.com | sh && echo 'export PATH=$PATH:$HOME/.pulumi/bin' >> ~/.bashrc",
+    "postCreateCommand": "git config --global credential.credentialStore cache && gh auth login || true",
     "remoteUser": "vscode",
     "customizations": {
         "vscode": {

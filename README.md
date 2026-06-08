@@ -52,10 +52,12 @@ Pulumi offers a wide range of ready-to-use templates to help you get started qui
 
 ```bash
 pulumi new -l
+pulumi new -l
 ```
 Since we are using Azure, we can filter the templates to show only Azure-related ones:
 
 ```bash
+pulumi new -l | grep azure
 pulumi new -l | grep azure
 ```
 
