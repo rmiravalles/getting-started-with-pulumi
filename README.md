@@ -2,105 +2,176 @@
 
 ## What is Pulumi?
 
-Pulumi is an open-source infrastructure as code (IaC) tool that allows developers to define, deploy, and manage cloud infrastructure using familiar programming languages like Python, JavaScript, TypeScript, Go, and C#. It enables users to create and manage cloud resources across various providers such as AWS, Azure, Google Cloud, and Kubernetes.
+Pulumi is an infrastructure as code tool that lets you define and manage cloud resources using real programming languages. In this repository, the example is a small Python project that deploys a static website to Azure.
 
-## First Steps
+## What This Repository Does
 
-For the sake of simplicity and brevity, I'll display examples using Linux, Python, and Azure as the cloud provider. However, Pulumi supports multiple languages and cloud providers, so you can adapt the examples to your preferred stack.
+The sample lives in [static-web](static-web) and uses:
 
-### Installation
+- Azure Blob Storage to host static files
+- Azure Native provider resources to create the Azure infrastructure
+- pulumi-synced-folder to publish the contents of [static-web/www](static-web/www)
 
-To get started with Pulumi, you need to install the Pulumi CLI. Run the script below to install it on your system:
+## Before You Start
+
+You will need:
+
+- A Pulumi Cloud account or another state backend
+- An Azure subscription
+- The Azure CLI installed and logged in
+- Python 3 and pip
+
+If you are new to Azure, create a free account first: https://azure.microsoft.com/free/
+
+Install the Pulumi CLI:
 
 ```bash
 curl -fsSL https://get.pulumi.com | sh
 ```
 
-To verify the installation, you can check the installed version of Pulumi by running:
+Verify the install:
 
 ```bash
 pulumi version
 ```
 
-For more installation options, visit the [Pulumi installation page](https://www.pulumi.com/docs/iac/download-install/).
-
-### Pulumi Cloud as the state backend
-
-Pulumi Cloud is a managed service that provides a secure and scalable backend for storing your Pulumi state files. To use Pulumi Cloud, you need to sign up for an account at [Pulumi Cloud](https://app.pulumi.com/signup). Pulumi Cloud is free for personal use and offers a generous free tier. You can also use other backends like AWS S3, Azure Blob Storage, or Google Cloud Storage if you prefer to manage your own state files.
-
-### Azure subscription and Azure CLI
-
-To deploy resources on Azure, you need an Azure subscription. If you don't have one, you can create a free account at [Azure Free Account](https://azure.microsoft.com/free/).
-
-You also need to install the Azure CLI to interact with Azure resources. You can install it by following the instructions on the [Azure CLI installation page](https://learn.microsoft.com/cli/azure/install-azure-cli).
-
-If you're using a Debian-based Linux distribution, you can install the Azure CLI using the following command:
-
-```bash
-curl -L https://aka.ms/InstallAzureCLI | sudo bash
-```
-
-After installing the Azure CLI, you can log in to your Azure account by running:
+Install the Azure CLI if needed, then sign in:
 
 ```bash
 az login
 ```
 
-## Creating a new Pulumi project
+## Helpful Pulumi CLI Commands
 
-Pulumi offers a wide range of ready-to-use templates to help you get started quickly. You can create a new Pulumi project using the `pulumi new` command. To list available templates, run:
+- `pulumi login` connects the CLI to your state backend
+- `pulumi whoami` confirms which Pulumi account you are using
+- `pulumi stack ls` shows available stacks
+- `pulumi stack init dev` creates a new stack for your environment
+- `pulumi config set azure-native:location eastus` sets the Azure region
+- `pulumi preview` shows the planned changes before anything is created
+- `pulumi up` applies the infrastructure changes
+- `pulumi stack output` prints exported values such as a website URL
+- `pulumi refresh` syncs the stack state with real cloud resources
+- `pulumi destroy` removes everything created by the stack
 
-```bash
-pulumi new -l
-```
-Since we are using Azure, we can filter the templates to show only Azure-related ones:
+## Beginner-Friendly Azure Deployment Steps
 
-```bash
-pulumi new -l | grep azure
-```
-
-For this project, we'll use a sample Pulumi project that creates a simple static website on Azure.
-
-### Creating a new Pulumi project using the Azure Static Website template
-
-This project will deploy a static website on Azure using Azure Blob Storage for hosting. It will also deploy an Azure CDN endpoint to serve the static content with low latency, caching, and HTTPS support.
-
-To create the project using the Azure Static Website template, run the following command:
+1. Open a terminal in the repository root and move into the sample project:
 
 ```bash
-pulumi new static-website-azure-python
+cd static-web
 ```
 
-This command will prompt you for some configuration options, such as the project name, description, stack, and Azure region. You can accept the default values or customize them as needed.
-
-### Activating the virtual environment and installing the required packages
-
-When you create a new Pulumi project, it automatically sets up a virtual environment for you. To activate the virtual environment, run the following command:
+2. Create and activate a virtual environment, then install the Python dependencies:
 
 ```bash
+python3 -m venv venv
 source venv/bin/activate
-```
-
-To install the required packages for the project, you can use `pip`. First, make sure you have pip installed.
-
-```bash
 pip install -r requirements.txt
 ```
 
-This command will install the necessary Python packages specified in the `requirements.txt` file, including the Pulumi Azure Native SDK and other dependencies.
+3. Make sure Pulumi is using your preferred backend:
 
-### The __main__.py__ file
+```bash
+pulumi login
+```
 
-The `__main__.py__` file is the entry point for your Pulumi project. It contains the code that defines the resources to be created in Azure.
+If you are just learning, Pulumi Cloud is the easiest option.
 
-### The Pulumi.yaml file
+4. Create or select a stack. A stack is a named environment such as dev, test, or prod:
 
-The `Pulumi.yaml` file is the configuration file for your Pulumi project. It contains metadata about the project, such as the project name, description, runtime, and dependencies.
+```bash
+pulumi stack init dev
+```
 
-### The Pulumi.<stack_name>.yaml file
+If the stack already exists, use `pulumi stack select dev` instead.
 
-The `Pulumi.<stack_name>.yaml` file contains the configuration for a specific stack in your Pulumi project. A stack is an isolated instance of your infrastructure, allowing you to manage different environments (e.g., development, staging, production) independently.
+5. Set the Azure region for the deployment:
 
-## Pulumi up
+```bash
+pulumi config set azure-native:location westeurope
+```
 
-To deploy the resources defined in your Pulumi project, you can use the `pulumi up` command. This command will show you a preview of the changes that will be made to your infrastructure and prompt you for confirmation before proceeding with the deployment.
+You can choose another Azure region if you want resources closer to you or your users.
+
+6. Confirm Azure CLI access:
+
+```bash
+az account show
+```
+
+If that fails, run `az login` again.
+
+7. Preview the deployment so you can see what will be created:
+
+```bash
+pulumi preview
+```
+
+8. Deploy the infrastructure:
+
+```bash
+pulumi up
+```
+
+Pulumi will show a final summary and ask for confirmation before making changes.
+
+9. After the update finishes, view the exported website URL:
+
+```bash
+pulumi stack output websiteURL
+```
+
+10. When you are done experimenting, clean up the Azure resources:
+
+```bash
+pulumi destroy
+```
+
+## Where The Code Lives
+
+- [static-web/__main__.py](static-web/__main__.py) is the main Pulumi program. It defines the Azure resources to deploy, the order they are created in, and the values that get exported after deployment.
+- [static-web/Pulumi.yaml](static-web/Pulumi.yaml) describes the project itself, including the name, runtime, and template metadata used by Pulumi.
+- [static-web/requirements.txt](static-web/requirements.txt) lists the Python packages needed to run the Pulumi program, including the Azure Native provider and the synced-folder helper.
+
+## How `__main__.py` Is Organized
+
+The [static-web/__main__.py](static-web/__main__.py) file is the entry point for the infrastructure code. Pulumi executes this file from top to bottom and uses it to build the resource graph for Azure.
+
+The file follows a simple structure:
+
+1. Read configuration values from `pulumi.Config()` so the deployment can be customized without changing code.
+2. Create a resource group to hold the Azure resources for the website.
+3. Create a storage account that will host the static content.
+4. Enable static website hosting on that storage account.
+5. Sync the local [static-web/www](static-web/www) folder into the website container.
+6. Export the public website URL so it can be viewed after `pulumi up` finishes.
+
+This structure is beginner-friendly because each block maps to one Azure concept. If you are learning Pulumi, a good way to read the file is to follow the resource declarations in the same order they appear and ask, "What Azure resource is being created here, and what depends on it?"
+
+### Key Parts Of The Program
+
+- `config = pulumi.Config()` loads stack configuration.
+- `path`, `index_document`, and `error_document` make the site folder and document names configurable.
+- `azure_native.resources.ResourceGroup(...)` creates the Azure resource group that scopes the rest of the deployment.
+- `azure_native.storage.StorageAccount(...)` creates the storage account used by the website.
+- `azure_native.storage.StorageAccountStaticWebsite(...)` turns on static website hosting for the storage account.
+- `synced_folder.AzureBlobFolder(...)` uploads the local website files into Azure Blob Storage.
+- `pulumi.export("websiteURL", ...)` makes the final URL visible from the Pulumi CLI.
+
+### How The Resources Depend On Each Other
+
+Pulumi does not rely on a separate dependency file. Instead, it builds the dependency graph from the resource arguments you pass into each constructor.
+
+In this program, the resource group is created first and then reused by later resources through properties like `resource_group.name`. That value is not a plain string; it is an output produced by the first resource, and Pulumi knows that the later resources cannot be created until the resource group exists.
+
+The same pattern repeats for the storage account and static website setup. The storage account name is passed into the static website resource, and both the storage account name and the website container name are passed into `synced_folder.AzureBlobFolder(...)`. Pulumi uses those references to infer the correct order automatically, so you only describe what should exist and how the resources relate to one another.
+
+In short, the logic is: create one resource, read its outputs, and feed those outputs into the next resource. That is how Pulumi understands both the relationships and the deployment order.
+
+## Project File Summary
+
+- [static-web/__main__.py](static-web/__main__.py) contains the resource definitions and deployment logic.
+- [static-web/Pulumi.yaml](static-web/Pulumi.yaml) contains project metadata and runtime settings.
+- [static-web/requirements.txt](static-web/requirements.txt) contains the Python dependencies required by the program.
+- [static-web/www](static-web/www) contains the static files that will be uploaded to Azure Blob Storage and served as the website content.
