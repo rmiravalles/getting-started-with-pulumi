@@ -41,6 +41,20 @@ Install the Azure CLI if needed, then sign in:
 az login
 ```
 
+## Pulumi New And Templates
+
+The `pulumi new` command creates a new Pulumi project from a ready-to-use template. Templates give you a working starting point with the right project files, dependencies, and sample infrastructure already in place.
+
+To see the templates that are available locally, run:
+
+```bash
+pulumi new -l
+```
+
+Because this repository is an Azure example, you can look for Azure-focused templates in that list. One of those templates is `static-website-azure-python`, which is the template used for this sample. It creates the same kind of static website project you see in [static-web](static-web): a Python Pulumi program, Azure Native resources, and a local `www` folder for website content.
+
+In practice, `pulumi new` is useful when you want to start from a known-good baseline instead of assembling the project structure yourself. You answer a few prompts, and Pulumi generates the files needed to begin deploying infrastructure right away.
+
 ## Helpful Pulumi CLI Commands
 
 - `pulumi login` connects the CLI to your state backend
