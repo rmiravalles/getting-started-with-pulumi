@@ -1,0 +1,20 @@
+{
+    "version": 3,
+    "deployment": {
+        "manifest": {
+            "time": "2026-06-09T21:32:05.524020975Z",
+            "magic": "",
+            "version": ""
+        },
+        "secrets_providers": {
+            "type": "service",
+            "state": {
+                "url": "https://api.pulumi.com",
+                "owner": "rmiravalles",
+                "project": "static-web-test",
+                "stack": "dev"
+            }
+        },
+        "metadata": {}
+    }
+}
